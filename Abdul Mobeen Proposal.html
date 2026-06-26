@@ -1,0 +1,2069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Abdul Mobeen — Senior UX/UI Designer · Shopify Live Commerce Proposal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold:        #C9A84C;
+  --gold-light:  #E8C97A;
+  --gold-dim:    #8A6A28;
+  --gold-pale:   rgba(201,168,76,0.08);
+  --gold-border: rgba(201,168,76,0.20);
+  --silver:      #A8B5C0;
+  --bg:          #080809;
+  --bg-card:     #0F0F12;
+  --bg-surface:  #161619;
+  --bg-subtle:   rgba(255,255,255,0.04);
+  --border-soft: rgba(255,255,255,0.07);
+  --text-white:  #F0EBE0;
+  --text-muted:  #7A7A86;
+  --text-silver: #9BAAB5;
+  --radius-sm:   8px;
+  --radius-md:   14px;
+  --radius-lg:   22px;
+  --radius-xl:   32px;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text-white);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ─── CANVAS ─── */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 3rem;
+  background: rgba(8,8,9,0.80);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--gold-border);
+  transition: background 0.3s;
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--gold);
+  letter-spacing: 0.03em;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover,
+.nav-links a.active { color: var(--gold); }
+
+.nav-cta {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%);
+  color: #080809 !important;
+  padding: 0.5rem 1.3rem;
+  border-radius: 50px;
+  font-weight: 600 !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.06em !important;
+  transition: opacity 0.2s, transform 0.2s !important;
+  text-transform: uppercase !important;
+}
+.nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* ─── PAGE WRAPPER ─── */
+.page { position: relative; z-index: 1; }
+
+/* ─── SECTIONS ─── */
+.section {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 6rem 3rem;
+}
+
+/* ─── TYPOGRAPHY HELPERS ─── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.70rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.1rem;
+}
+.eyebrow-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.display {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.6rem, 5.5vw, 5rem);
+  font-weight: 700;
+  line-height: 1.07;
+  letter-spacing: -0.01em;
+}
+
+.display em { color: var(--gold); font-style: italic; }
+
+.heading-2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.heading-3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.body-lead {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.80;
+}
+
+.gold-rule {
+  width: 44px; height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin: 1.2rem 0 0;
+  border: none;
+}
+
+/* ─── BUTTONS ─── */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  color: #080809;
+  padding: 0.9rem 2.2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: transform 0.2s, opacity 0.2s;
+  white-space: nowrap;
+}
+.btn-gold:hover { transform: translateY(-2px); opacity: 0.90; }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--gold-border);
+  color: var(--gold-light);
+  padding: 0.9rem 2.2rem;
+  border-radius: 50px;
+  font-size: 0.88rem;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: background 0.2s, border-color 0.2s;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+}
+.btn-ghost:hover {
+  background: var(--gold-pale);
+  border-color: rgba(201,168,76,0.40);
+}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.10s; }
+.reveal-delay-2 { transition-delay: 0.20s; }
+.reveal-delay-3 { transition-delay: 0.30s; }
+.reveal-delay-4 { transition-delay: 0.40s; }
+
+/* ════════════════════════════════════
+   HERO
+════════════════════════════════════ */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 9rem;
+  padding-bottom: 5rem;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold-border);
+  padding: 0.42rem 1.1rem;
+  border-radius: 50px;
+  background: var(--gold-pale);
+  margin-bottom: 2rem;
+}
+
+.pulse-ring {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  position: relative;
+}
+.pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  animation: pulse-out 2s infinite;
+}
+@keyframes pulse-out {
+  0%   { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+.hero-headline { margin-bottom: 1.5rem; }
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 580px;
+  line-height: 1.80;
+  margin-bottom: 2.8rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 5rem;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 0;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-width: 700px;
+  background: var(--bg-card);
+}
+
+.stat {
+  padding: 1.6rem 2rem;
+  border-right: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.stat:last-child { border-right: none; }
+
+.stat-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+.stat-l {
+  font-size: 0.70rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ─── LIVE PREVIEW CARD ─── */
+.hero-preview {
+  position: absolute;
+  right: 3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 340px;
+  background: var(--bg-card);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+}
+
+.preview-video {
+  height: 190px;
+  background: linear-gradient(135deg, #0e0a03 0%, #1a1205 50%, #0a0d0f 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-live-badge {
+  position: absolute;
+  top: 12px; left: 12px;
+  background: #e53935;
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  padding: 0.22rem 0.6rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.preview-play {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  border: 2px solid rgba(201,168,76,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 1.3rem;
+}
+
+.preview-viewer {
+  position: absolute;
+  bottom: 10px; right: 12px;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.6);
+}
+
+.preview-body {
+  padding: 1.2rem;
+}
+
+.preview-product {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.preview-img {
+  width: 44px; height: 44px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #2a1f08, #3d2e0e);
+  border: 1px solid var(--gold-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.preview-name {
+  font-size: 0.80rem;
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+
+.preview-price {
+  font-size: 0.72rem;
+  color: var(--gold);
+}
+
+.preview-cta {
+  width: 100%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  color: #080809;
+  border: none;
+  padding: 0.65rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+}
+
+.preview-country {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.country-pill {
+  font-size: 0.62rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 50px;
+  border: 1px solid var(--border-soft);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.country-pill.active {
+  border-color: var(--gold-border);
+  color: var(--gold);
+  background: var(--gold-pale);
+}
+
+/* ─── HERO LAYOUT ─── */
+.hero-left { max-width: 640px; }
+
+@media (min-width: 1100px) {
+  #hero { flex-direction: row; align-items: center; justify-content: space-between; gap: 3rem; }
+  .hero-left { max-width: 580px; }
+  .hero-stats { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ════════════════════════════════════
+   UNDERSTANDING SECTION
+════════════════════════════════════ */
+#understanding {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.understand-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.understand-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  margin-top: 2rem;
+}
+
+.understand-item {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+}
+
+.check-icon {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--gold-pale);
+  border: 1px solid var(--gold-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--gold);
+  font-size: 0.65rem;
+}
+
+.understand-item p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.70;
+}
+
+.understand-item strong {
+  color: var(--text-white);
+  font-weight: 500;
+}
+
+.challenge-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  padding: 2.2rem;
+}
+
+.challenge-card .heading-3 {
+  margin-bottom: 1.5rem;
+  color: var(--gold-light);
+}
+
+.challenge-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ch-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-soft);
+}
+
+.ch-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--gold-dim);
+  line-height: 1;
+}
+
+.ch-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-white);
+  margin-bottom: 0.2rem;
+  letter-spacing: 0.02em;
+}
+
+.ch-desc {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ════════════════════════════════════
+   WHY ME
+════════════════════════════════════ */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.3rem;
+  margin-top: 3rem;
+}
+
+.why-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.8rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s;
+  cursor: default;
+}
+
+.why-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.why-card::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; right: -60px;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: var(--gold-pale);
+  transition: transform 0.4s;
+}
+
+.why-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold-border);
+}
+.why-card:hover::before { opacity: 1; }
+.why-card:hover::after { transform: scale(1.5); }
+
+.why-icon-wrap {
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  background: var(--gold-pale);
+  border: 1px solid var(--gold-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-bottom: 1.3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.why-card h3 {
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  position: relative;
+  z-index: 1;
+}
+
+.why-card p {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  line-height: 1.72;
+  position: relative;
+  z-index: 1;
+}
+
+/* ════════════════════════════════════
+   APPROACH / TIMELINE
+════════════════════════════════════ */
+#approach {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.approach-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.phase-track {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 2rem;
+}
+
+.phase-track::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 28px;
+  bottom: 28px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--gold), var(--gold-dim), transparent);
+}
+
+.phase-step {
+  display: flex;
+  gap: 1.4rem;
+  padding: 1.5rem 0;
+  position: relative;
+}
+
+.phase-dot {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--gold-border);
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.75rem;
+  color: var(--gold);
+  position: relative;
+  z-index: 1;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.phase-step:hover .phase-dot {
+  background: var(--gold-pale);
+  border-color: var(--gold);
+}
+
+.phase-detail { padding-top: 4px; }
+
+.phase-week {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.phase-detail h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.phase-detail p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.70;
+}
+
+/* Timeline Visual */
+.timeline-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.tl-title {
+  font-size: 0.70rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1.8rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.tl-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tl-lbl {
+  font-size: 0.73rem;
+  color: var(--text-muted);
+}
+
+.tl-track {
+  background: var(--bg-subtle);
+  border-radius: 50px;
+  height: 26px;
+  overflow: hidden;
+}
+
+.tl-fill {
+  height: 100%;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
+.tl-fill.g { background: linear-gradient(90deg, var(--gold), var(--gold-light)); color: #080809; }
+.tl-fill.s { background: linear-gradient(90deg, #A8B5C0, #D0DDE6); color: #111; }
+.tl-fill.d { background: rgba(201,168,76,0.28); color: var(--gold-light); }
+
+.deliverables {
+  margin-top: 1.8rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.del-tag {
+  font-size: 0.68rem;
+  padding: 0.28rem 0.75rem;
+  border-radius: 50px;
+  border: 1px solid var(--gold-border);
+  color: var(--gold-light);
+  background: var(--gold-pale);
+  letter-spacing: 0.03em;
+}
+
+/* ════════════════════════════════════
+   PORTFOLIO
+════════════════════════════════════ */
+.portfolio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+
+.port-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform 0.35s, border-color 0.35s;
+  display: flex;
+  flex-direction: column;
+}
+
+.port-card:hover {
+  transform: translateY(-7px);
+  border-color: var(--gold-border);
+}
+
+.port-thumb {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
+  font-style: italic;
+  position: relative;
+  overflow: hidden;
+}
+
+.port-thumb .port-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, var(--bg-card));
+}
+
+.thumb-dark-gold  { background: linear-gradient(135deg, #13100A, #231a08, #130f07); color: var(--gold); }
+.thumb-dark-green { background: linear-gradient(135deg, #090f09, #102010, #0a140a); color: #7DB87D; }
+.thumb-dark-blue  { background: linear-gradient(135deg, #080d14, #0c1828, #091120); color: #6DB8D4; }
+.thumb-dark-rose  { background: linear-gradient(135deg, #130a0d, #200f15, #130a0d); color: #C47A8A; }
+.thumb-dark-amber { background: linear-gradient(135deg, #140e04, #201505, #110c04); color: #D4A44C; }
+.thumb-dark-teal  { background: linear-gradient(135deg, #04110e, #071f1a, #040f0d); color: #5ABBA0; }
+
+.port-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(201,168,76,0.06) 50%, transparent 60%);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.port-card:hover .port-shimmer { transform: translateX(100%); }
+
+.port-body {
+  padding: 1.5rem 1.7rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.port-domain {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+.port-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.port-desc {
+  font-size: 0.80rem;
+  color: var(--text-muted);
+  line-height: 1.70;
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+.port-roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.role-chip {
+  font-size: 0.64rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  background: var(--gold-pale);
+  color: var(--gold-light);
+  border: 1px solid var(--gold-border);
+}
+
+.port-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 500;
+  transition: gap 0.2s;
+}
+.port-link:hover { gap: 0.65rem; }
+
+/* Full-width portfolio callout card */
+.port-figma-card {
+  margin-top: 1.4rem;
+  background: linear-gradient(135deg, rgba(201,168,76,0.07), rgba(201,168,76,0.02));
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-lg);
+  padding: 2.8rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.figma-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.figma-text p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  max-width: 520px;
+  line-height: 1.70;
+}
+
+/* ════════════════════════════════════
+   LIVE COMMERCE UNDERSTANDING
+════════════════════════════════════ */
+#livecommerce {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.lc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.lc-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  padding: 0;
+  overflow: hidden;
+}
+
+.lc-card-header {
+  padding: 1.3rem 1.8rem;
+  background: linear-gradient(90deg, rgba(201,168,76,0.08), transparent);
+  border-bottom: 1px solid var(--border-soft);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.lc-dot { width: 8px; height: 8px; border-radius: 50%; }
+.lc-dot.red { background: #e53935; }
+.lc-dot.amber { background: var(--gold); }
+.lc-dot.green { background: #43a047; }
+
+.lc-title-bar {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.lc-streams {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.stream-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 1rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.stream-thumb {
+  width: 48px; height: 34px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #1a1205, #261c08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  border: 1px solid var(--gold-border);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.live-pip {
+  position: absolute;
+  top: 3px; right: 3px;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #e53935;
+}
+
+.stream-info { overflow: hidden; }
+
+.stream-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stream-country {
+  font-size: 0.66rem;
+  color: var(--text-muted);
+}
+
+.stream-viewers {
+  font-size: 0.70rem;
+  color: var(--gold);
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.country-switch-bar {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.cs-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-right: 0.3rem;
+}
+
+.cs-pill {
+  font-size: 0.65rem;
+  padding: 0.22rem 0.6rem;
+  border-radius: 50px;
+  border: 1px solid var(--border-soft);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.cs-pill.on {
+  background: var(--gold-pale);
+  border-color: var(--gold-border);
+  color: var(--gold);
+}
+
+.lc-points {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.lc-point {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+}
+
+.lc-point-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: var(--gold-pale);
+  border: 1px solid var(--gold-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+.lc-point h4 {
+  font-size: 0.90rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.lc-point p {
+  font-size: 0.80rem;
+  color: var(--text-muted);
+  line-height: 1.68;
+}
+
+/* ════════════════════════════════════
+   TRUST SIGNALS
+════════════════════════════════════ */
+.trust-band {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-card);
+  margin-top: 3rem;
+}
+
+.trust-cell {
+  padding: 2rem 1rem;
+  text-align: center;
+  border-right: 1px solid var(--border-soft);
+  transition: background 0.2s;
+}
+.trust-cell:last-child { border-right: none; }
+.trust-cell:hover { background: var(--bg-subtle); }
+
+.trust-ico { font-size: 1.5rem; display: block; margin-bottom: 0.6rem; }
+.trust-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+  display: block;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.trust-lbl {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ════════════════════════════════════
+   TESTIMONIAL / QUOTE
+════════════════════════════════════ */
+.quote-wrap {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+  padding: 5rem 3rem;
+}
+
+.quote-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.quote-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: 7rem;
+  line-height: 0.7;
+  color: var(--gold-dim);
+  font-style: italic;
+  user-select: none;
+}
+
+.quote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+  font-style: italic;
+  line-height: 1.60;
+  color: var(--text-white);
+  margin-bottom: 1.5rem;
+}
+
+.quote-source {
+  font-size: 0.80rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.quote-source::before {
+  content: '';
+  width: 28px; height: 1px;
+  background: var(--gold-dim);
+  display: inline-block;
+}
+
+/* ════════════════════════════════════
+   FINAL CTA
+════════════════════════════════════ */
+#cta {
+  text-align: center;
+  padding: 8rem 3rem;
+}
+
+.cta-inner { max-width: 720px; margin: 0 auto; }
+
+.cta-title { margin-bottom: 1.2rem; }
+
+.cta-sub {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.80;
+  margin-bottom: 2.8rem;
+}
+
+.cta-btns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.discovery-box {
+  background: var(--bg-card);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-md);
+  padding: 1.8rem 2.2rem;
+  text-align: left;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.dq-eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dq-eyebrow::before {
+  content: '?';
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--gold-pale);
+  border: 1px solid var(--gold-border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: var(--gold);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.dq-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.02rem;
+  font-style: italic;
+  color: var(--text-silver);
+  line-height: 1.72;
+}
+
+/* ════════════════════════════════════
+   FOOTER
+════════════════════════════════════ */
+footer {
+  border-top: 1px solid var(--border-soft);
+  padding: 2.2rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1160px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  color: var(--gold);
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.footer-nav a {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-nav a:hover { color: var(--gold); }
+
+.footer-copy {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* ════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .hero-preview { display: none; }
+  .understand-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .approach-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .lc-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .trust-band { grid-template-columns: repeat(3, 1fr); }
+  .trust-cell:nth-child(3) { border-right: none; }
+  .trust-cell:nth-child(4) { border-right: 1px solid var(--border-soft); }
+  .quote-inner { grid-template-columns: 1fr; gap: 1rem; }
+  .quote-mark { font-size: 4rem; }
+}
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.2rem; }
+  .nav-links { display: none; }
+  .section { padding: 4rem 1.2rem; }
+  .why-grid { grid-template-columns: 1fr; }
+  .portfolio-grid { grid-template-columns: 1fr; }
+  .trust-band { grid-template-columns: repeat(2, 1fr); }
+  .trust-cell:nth-child(2) { border-right: none; }
+  .trust-cell:nth-child(3) { border-right: 1px solid var(--border-soft); }
+  .trust-cell:nth-child(4) { border-right: none; }
+  .trust-cell:nth-child(5) { border-right: none; }
+  footer { padding: 1.5rem 1.2rem; flex-direction: column; text-align: center; }
+  .footer-nav { justify-content: center; }
+  .port-figma-card { flex-direction: column; text-align: center; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .stat:nth-child(2) { border-right: none; }
+  .stat:nth-child(3) { border-top: 1px solid var(--border-soft); }
+  .stat:nth-child(4) { border-top: 1px solid var(--border-soft); }
+  #cta { padding: 5rem 1.2rem; }
+  .quote-wrap { padding: 3.5rem 1.2rem; }
+  .approach-wrap { gap: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+  * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<!-- ─── NAV ─── -->
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo">Abdul Mobeen</a>
+  <ul class="nav-links">
+    <li><a href="#understanding">Understanding</a></li>
+    <li><a href="#why">Why Me</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#cta" class="nav-cta">Hire Me</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+
+<!-- ════════════════════════════════════
+     HERO
+════════════════════════════════════ -->
+<section class="section" id="hero" style="min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding-top:9rem; padding-bottom:5rem; position:relative;">
+
+  <div class="hero-left">
+    <div class="hero-badge reveal">
+      <div class="pulse-ring"></div>
+      Senior UX/UI Proposal &nbsp;·&nbsp; Shopify Live Commerce
+    </div>
+
+    <h1 class="display hero-headline reveal reveal-delay-1">
+      A design system<br/>built for <em>live gold</em><br/>and a premium audience
+    </h1>
+
+    <p class="hero-sub reveal reveal-delay-2">
+      Your live-selling experience deserves more than a beautiful theme. I design scalable Figma systems where simultaneous streams, country switching, and mobile trust cues feel effortless — not bolted on.
+    </p>
+
+    <div class="hero-actions reveal reveal-delay-3">
+      <a href="#cta" class="btn-gold">Start the Conversation</a>
+      <a href="https://www.figma.com/design/ljXPYvFxXRogqHJUC3i0dL/Markloops-Portfolios?node-id=0-1&p=f" target="_blank" class="btn-ghost">View Figma Portfolio →</a>
+    </div>
+
+    <div class="hero-stats reveal reveal-delay-4">
+      <div class="stat">
+        <span class="stat-n">6+</span>
+        <span class="stat-l">Years Shopify</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n">50+</span>
+        <span class="stat-l">Stores Built</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n">100%</span>
+        <span class="stat-l">Figma-First</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n">3</span>
+        <span class="stat-l">Premium DTC Brands</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live Commerce Preview Card -->
+  <div class="hero-preview reveal reveal-delay-2" aria-hidden="true">
+    <div class="preview-video">
+      <span class="preview-live-badge">● Live</span>
+      <div class="preview-play">▶</div>
+      <span class="preview-viewer">2,481 watching</span>
+    </div>
+    <div class="preview-body">
+      <div class="preview-product">
+        <div class="preview-img">✦</div>
+        <div>
+          <div class="preview-name">18K Gold Chain — 22"</div>
+          <div class="preview-price">$1,240 · Limited Drop</div>
+        </div>
+      </div>
+      <button class="preview-cta">Add to Cart — Buy Now</button>
+      <div class="preview-country">
+        <span class="country-pill active">🇺🇸 US</span>
+        <span class="country-pill">🇬🇧 UK</span>
+        <span class="country-pill">🇦🇪 UAE</span>
+        <span class="country-pill">🇸🇦 KSA</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ════════════════════════════════════
+     UNDERSTANDING
+════════════════════════════════════ -->
+<div id="understanding" style="background:var(--bg-card); border-top:1px solid var(--border-soft); border-bottom:1px solid var(--border-soft);">
+<div class="section">
+  <div class="understand-grid">
+    <div class="reveal">
+      <span class="eyebrow"><span class="eyebrow-dot"></span> I Read Your Brief</span>
+      <h2 class="heading-2">What your project actually needs</h2>
+      <div class="gold-rule"></div>
+
+      <div class="understand-list" style="margin-top:2rem;">
+        <div class="understand-item">
+          <div class="check-icon">✓</div>
+          <p><strong>Live-selling is the hero, not a banner.</strong> On-site live video shows are the primary experience — every layout decision flows from this, not from a typical Shopify template.</p>
+        </div>
+        <div class="understand-item">
+          <div class="check-icon">✓</div>
+          <p><strong>Dark, premium aesthetic with refined gold and silver accents.</strong> Tasteful micro-interactions and animations that build trust without distracting from the product.</p>
+        </div>
+        <div class="understand-item">
+          <div class="check-icon">✓</div>
+          <p><strong>Scalable system for multiple simultaneous live streams</strong> across multiple countries, with a mobile-first country-switching experience that feels native.</p>
+        </div>
+        <div class="understand-item">
+          <div class="check-icon">✓</div>
+          <p><strong>UX critique and pressure-testing first,</strong> then high-fidelity UI. You need a designer who shapes the experience — not just one who makes it look premium.</p>
+        </div>
+        <div class="understand-item">
+          <div class="check-icon">✓</div>
+          <p><strong>Figma as the working tool,</strong> with dev-ready component libraries and specs — not one-off screens that fall apart during implementation.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-2">
+      <div class="challenge-card">
+        <h3 class="heading-3">The UX challenges I'll solve</h3>
+        <div class="challenge-items">
+          <div class="ch-item">
+            <span class="ch-num">1</span>
+            <div>
+              <div class="ch-label">Live-stream hero hierarchy</div>
+              <div class="ch-desc">How users split attention between the stream, product panel, and buy button — designing that tension so conversion wins.</div>
+            </div>
+          </div>
+          <div class="ch-item">
+            <span class="ch-num">2</span>
+            <div>
+              <div class="ch-label">Country switcher architecture</div>
+              <div class="ch-desc">Whether filtering streams by region or localising pricing — this shapes the entire nav. I'll clarify and design both paths.</div>
+            </div>
+          </div>
+          <div class="ch-item">
+            <span class="ch-num">3</span>
+            <div>
+              <div class="ch-label">Multi-stream scalability</div>
+              <div class="ch-desc">A component system that handles one stream or twenty, across desktop and 375px mobile, without breaking the premium feel.</div>
+            </div>
+          </div>
+          <div class="ch-item">
+            <span class="ch-num">4</span>
+            <div>
+              <div class="ch-label">Trust & credibility cues</div>
+              <div class="ch-desc">Premium gold and silver jewellery requires strong trust signals baked into every page — not added as an afterthought.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════
+     WHY ME
+════════════════════════════════════ -->
+<section class="section" id="why">
+  <div class="reveal">
+    <span class="eyebrow"><span class="eyebrow-dot"></span> Why Abdul Mobeen</span>
+    <h2 class="heading-2">What I bring to this platform</h2>
+    <div class="gold-rule"></div>
+  </div>
+
+  <div class="why-grid" style="margin-top:3rem;">
+    <div class="why-card reveal">
+      <div class="why-icon-wrap">⬛</div>
+      <h3>Dark Premium Aesthetic</h3>
+      <p>I've shipped refined dark-mode experiences for DTC brands — editorial layouts, gold and silver accents, and typography that commands trust at a premium price point.</p>
+    </div>
+    <div class="why-card reveal reveal-delay-1">
+      <div class="why-icon-wrap">📐</div>
+      <h3>Scalable Figma Systems</h3>
+      <p>Every screen I deliver is part of a component library — not a one-off file. Your design system handles multiple live streams and new country toggles without starting over.</p>
+    </div>
+    <div class="why-card reveal reveal-delay-2">
+      <div class="why-icon-wrap">📱</div>
+      <h3>Mobile-First Live UX</h3>
+      <p>I design for the thumb first. Country switchers, stream toggles, and buy buttons that work cleanly at 375px before we ever scale to desktop.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon-wrap">🔁</div>
+      <h3>Long-Term Partnership</h3>
+      <p>This isn't a one-off engagement. You get consistent communication and someone available as you scale into new markets, live event formats, and product categories.</p>
+    </div>
+    <div class="why-card reveal reveal-delay-1">
+      <div class="why-icon-wrap">🔍</div>
+      <h3>UX Pressure-Testing</h3>
+      <p>I critique your wireframes before touching pixels. Navigation structure, live-show hierarchy, trust signal placement — UX risks flagged in Week 1, not after handoff.</p>
+    </div>
+    <div class="why-card reveal reveal-delay-2">
+      <div class="why-icon-wrap">✦</div>
+      <h3>Shopify-Native Thinking</h3>
+      <p>6+ years on Shopify means I design with implementation in mind. No beautiful screens that break in Liquid. What I design ships cleanly every time.</p>
+    </div>
+  </div>
+
+  <!-- Trust Band -->
+  <div class="trust-band reveal" style="margin-top:3rem;">
+    <div class="trust-cell">
+      <span class="trust-ico">⚡</span>
+      <span class="trust-val">24hr</span>
+      <span class="trust-lbl">First Delivery</span>
+    </div>
+    <div class="trust-cell">
+      <span class="trust-ico">🗓</span>
+      <span class="trust-val">Daily</span>
+      <span class="trust-lbl">Updates</span>
+    </div>
+    <div class="trust-cell">
+      <span class="trust-ico">🔒</span>
+      <span class="trust-val">NDA</span>
+      <span class="trust-lbl">Ready to Sign</span>
+    </div>
+    <div class="trust-cell">
+      <span class="trust-ico">♾</span>
+      <span class="trust-val">∞</span>
+      <span class="trust-lbl">Revisions</span>
+    </div>
+    <div class="trust-cell">
+      <span class="trust-ico">📦</span>
+      <span class="trust-val">Dev-Ready</span>
+      <span class="trust-lbl">Figma Handoff</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     APPROACH
+════════════════════════════════════ -->
+<div id="approach" style="background:var(--bg-card); border-top:1px solid var(--border-soft); border-bottom:1px solid var(--border-soft);">
+<div class="section">
+  <div class="reveal" style="margin-bottom:3rem;">
+    <span class="eyebrow"><span class="eyebrow-dot"></span> Delivery Plan</span>
+    <h2 class="heading-2">How I'd run this week to week</h2>
+    <div class="gold-rule"></div>
+  </div>
+
+  <div class="approach-wrap">
+    <div class="phase-track reveal">
+      <div class="phase-step">
+        <div class="phase-dot">1</div>
+        <div class="phase-detail">
+          <span class="phase-week">Week 1</span>
+          <h4>UX Audit &amp; Wireframe Critique</h4>
+          <p>Review your mobile-first wireframes, pressure-test the live-show hero, country-switcher logic, and navigation architecture. Identify and fix UX risks before any pixel is drawn.</p>
+        </div>
+      </div>
+      <div class="phase-step">
+        <div class="phase-dot">2</div>
+        <div class="phase-detail">
+          <span class="phase-week">Week 2</span>
+          <h4>Design System Foundation</h4>
+          <p>Build the Figma component library — typography scale, dark premium colour tokens, interactive state variants, and the live-stream card system that everything else inherits.</p>
+        </div>
+      </div>
+      <div class="phase-step">
+        <div class="phase-dot">3</div>
+        <div class="phase-detail">
+          <span class="phase-week">Weeks 3–4</span>
+          <h4>Full High-Fidelity UI</h4>
+          <p>All pages, desktop and mobile — live-show hero, product panels, country switcher, checkout trust signals, and refined micro-interactions throughout.</p>
+        </div>
+      </div>
+      <div class="phase-step">
+        <div class="phase-dot">4</div>
+        <div class="phase-detail">
+          <span class="phase-week">Ongoing</span>
+          <h4>Scale &amp; Iterate</h4>
+          <p>Available as you add markets, expand stream types, or grow the product catalogue. The system is built to absorb it without starting over.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-2">
+      <div class="timeline-box">
+        <div class="tl-title">📅 Project Timeline Snapshot</div>
+        <div class="tl-row">
+          <span class="tl-lbl">UX Audit</span>
+          <div class="tl-track"><div class="tl-fill g" style="width:28%">Wk 1</div></div>
+        </div>
+        <div class="tl-row">
+          <span class="tl-lbl">Design System</span>
+          <div class="tl-track"><div class="tl-fill s" style="width:52%">Wk 2</div></div>
+        </div>
+        <div class="tl-row">
+          <span class="tl-lbl">Full UI</span>
+          <div class="tl-track"><div class="tl-fill g" style="width:78%">Wk 3–4</div></div>
+        </div>
+        <div class="tl-row">
+          <span class="tl-lbl">Iterations</span>
+          <div class="tl-track"><div class="tl-fill d" style="width:100%">Ongoing</div></div>
+        </div>
+
+        <div class="deliverables">
+          <span class="del-tag">Figma Component Library</span>
+          <span class="del-tag">Desktop UI</span>
+          <span class="del-tag">Mobile UI</span>
+          <span class="del-tag">Country Switcher</span>
+          <span class="del-tag">Live Stream Layout</span>
+          <span class="del-tag">Dark Design Tokens</span>
+          <span class="del-tag">Dev Handoff Specs</span>
+          <span class="del-tag">Micro-interactions</span>
+          <span class="del-tag">Trust Signal System</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════
+     LIVE COMMERCE UNDERSTANDING
+════════════════════════════════════ -->
+<div id="livecommerce">
+<div class="section">
+  <div class="lc-grid">
+    <div class="reveal">
+      <span class="eyebrow"><span class="eyebrow-dot"></span> Live Commerce Experience</span>
+      <h2 class="heading-2">Designing for real-time, high-urgency commerce</h2>
+      <div class="gold-rule" style="margin-bottom:2rem;"></div>
+
+      <div class="lc-points">
+        <div class="lc-point">
+          <div class="lc-point-icon">⚡</div>
+          <div>
+            <h4>Urgency without anxiety</h4>
+            <p>Flash-sale and limited-drop flows on Shopify Plus projects taught me how to create urgency that converts — without making users feel pressured into mistakes. The same UX tension applies to live selling.</p>
+          </div>
+        </div>
+        <div class="lc-point">
+          <div class="lc-point-icon">🎬</div>
+          <div>
+            <h4>Video-dominant viewport thinking</h4>
+            <p>For Atelier RMR and Senbird Tea, I designed hero sections where video or motion is the primary storytelling element. Scroll behaviour, CTA placement, and layout logic around moving content — all handled.</p>
+          </div>
+        </div>
+        <div class="lc-point">
+          <div class="lc-point-icon">🌍</div>
+          <div>
+            <h4>Multi-market, multi-stream architecture</h4>
+            <p>A clean mental model for how to design country-switching that works for both stream filtering and localised pricing — and how to handle the toggle gracefully on a 375px mobile screen.</p>
+          </div>
+        </div>
+        <div class="lc-point">
+          <div class="lc-point-icon">🛒</div>
+          <div>
+            <h4>Attention-split buy button design</h4>
+            <p>I'll focus on how users split attention between the stream, the product panel, and the buy button — and design that tension so conversion wins without killing the premium experience.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-2">
+      <div class="lc-card">
+        <div class="lc-card-header">
+          <div class="lc-dot red"></div>
+          <div class="lc-dot amber"></div>
+          <div class="lc-dot green"></div>
+          <span class="lc-title-bar">Live streams — multi-market view</span>
+        </div>
+        <div class="lc-streams">
+          <div class="stream-item">
+            <div class="stream-thumb">✦<div class="live-pip"></div></div>
+            <div class="stream-info">
+              <div class="stream-name">18K Gold Collection Drop</div>
+              <div class="stream-country">🇺🇸 US &amp; 🇬🇧 UK</div>
+            </div>
+            <div class="stream-viewers">2,481 live</div>
+          </div>
+          <div class="stream-item">
+            <div class="stream-thumb">◈<div class="live-pip"></div></div>
+            <div class="stream-info">
+              <div class="stream-name">Silver Bangles — Exclusive</div>
+              <div class="stream-country">🇦🇪 UAE &amp; 🇸🇦 KSA</div>
+            </div>
+            <div class="stream-viewers">1,120 live</div>
+          </div>
+          <div class="stream-item">
+            <div class="stream-thumb">◇</div>
+            <div class="stream-info">
+              <div class="stream-name">Diamond Accents Preview</div>
+              <div class="stream-country">🇩🇪 DE &amp; 🇫🇷 FR — Starting Soon</div>
+            </div>
+            <div class="stream-viewers" style="color:var(--text-muted);">Soon</div>
+          </div>
+        </div>
+        <div class="country-switch-bar">
+          <span class="cs-label">Region</span>
+          <span class="cs-pill on">All</span>
+          <span class="cs-pill">Americas</span>
+          <span class="cs-pill">MENA</span>
+          <span class="cs-pill">Europe</span>
+          <span class="cs-pill">APAC</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════
+     PORTFOLIO
+════════════════════════════════════ -->
+<section class="section" id="portfolio">
+  <div class="portfolio-header reveal">
+    <div>
+      <span class="eyebrow"><span class="eyebrow-dot"></span> Portfolio</span>
+      <h2 class="heading-2">Relevant premium DTC work</h2>
+      <div class="gold-rule"></div>
+    </div>
+    <a href="https://www.figma.com/design/ljXPYvFxXRogqHJUC3i0dL/Markloops-Portfolios?node-id=0-1&p=f" target="_blank" class="btn-ghost">View All in Figma →</a>
+  </div>
+
+  <div class="portfolio-grid">
+
+    <div class="port-card reveal">
+      <div class="port-thumb thumb-dark-gold">
+        Atelier RMR
+        <div class="port-overlay"></div>
+        <div class="port-shimmer"></div>
+      </div>
+      <div class="port-body">
+        <span class="port-domain">atelierrmr.ca</span>
+        <h3 class="port-name">Atelier RMR</h3>
+        <p class="port-desc">Premium fashion brand — dark editorial aesthetic, scalable Figma component system, mobile-first checkout. Closest in tone and ambition to your brief.</p>
+        <div class="port-roles">
+          <span class="role-chip">End-to-End UX/UI</span>
+          <span class="role-chip">Figma System</span>
+          <span class="role-chip">Dark Aesthetic</span>
+          <span class="role-chip">Mobile-First</span>
+        </div>
+        <a href="https://atelierrmr.ca" target="_blank" class="port-link">View Live Site →</a>
+      </div>
+    </div>
+
+    <div class="port-card reveal reveal-delay-1">
+      <div class="port-thumb thumb-dark-green">
+        Prima
+        <div class="port-overlay"></div>
+        <div class="port-shimmer"></div>
+      </div>
+      <div class="port-body">
+        <span class="port-domain">prima.co</span>
+        <h3 class="port-name">Prima</h3>
+        <p class="port-desc">Premium DTC wellness brand — redesigned product discovery flow, scalable component library, and trust signals strengthened across all pages.</p>
+        <div class="port-roles">
+          <span class="role-chip">UX Audit</span>
+          <span class="role-chip">Component Library</span>
+          <span class="role-chip">Trust Signals</span>
+          <span class="role-chip">Checkout UX</span>
+        </div>
+        <a href="https://prima.co" target="_blank" class="port-link">View Live Site →</a>
+      </div>
+    </div>
+
+    <div class="port-card reveal reveal-delay-2">
+      <div class="port-thumb thumb-dark-blue">
+        Senbird Tea
+        <div class="port-overlay"></div>
+        <div class="port-shimmer"></div>
+      </div>
+      <div class="port-body">
+        <span class="port-domain">senbirdtea.com</span>
+        <h3 class="port-name">Senbird Tea</h3>
+        <p class="port-desc">Content-heavy storytelling brand — full IA, mobile UX, and high-fidelity UI focused on reducing friction from content discovery to checkout.</p>
+        <div class="port-roles">
+          <span class="role-chip">Info Architecture</span>
+          <span class="role-chip">Mobile UX</span>
+          <span class="role-chip">Video Hero</span>
+          <span class="role-chip">High-Fi UI</span>
+        </div>
+        <a href="https://senbirdtea.com" target="_blank" class="port-link">View Live Site →</a>
+      </div>
+    </div>
+
+    <div class="port-card reveal">
+      <div class="port-thumb thumb-dark-rose">
+        Half Bak'd
+        <div class="port-overlay"></div>
+        <div class="port-shimmer"></div>
+      </div>
+      <div class="port-body">
+        <span class="port-domain">half-bakd.com</span>
+        <h3 class="port-name">Half Bak'd</h3>
+        <p class="port-desc">High-conversion DTC product brand — product page UX, bundle builder design, and mobile checkout optimisation across the full funnel.</p>
+        <div class="port-roles">
+          <span class="role-chip">Product Page UX</span>
+          <span class="role-chip">Bundle Builder</span>
+          <span class="role-chip">Conversion UX</span>
+        </div>
+        <a href="https://half-bakd.com" target="_blank" class="port-link">View Live Site →</a>
+      </div>
+    </div>
+
+    <div class="port-card reveal reveal-delay-1">
+      <div class="port-thumb thumb-dark-amber">
+        Eureka Farms
+        <div class="port-overlay"></div>
+        <div class="port-shimmer"></div>
+      </div>
+      <div class="port-body">
+        <span class="port-domain">eureka-farms.com</span>
+        <h3 class="port-name">Eureka Farms</h3>
+        <p class="port-desc">Subscription and catalogue-heavy Shopify store — navigation architecture, filterable catalogue UX, and mobile purchase flow rework.</p>
+        <div class="port-roles">
+          <span class="role-chip">Nav Architecture</span>
+          <span class="role-chip">Catalogue UX</span>
+          <span class="role-chip">Subscription Flow</span>
+        </div>
+        <a href="https://eureka-farms.com" target="_blank" class="port-link">View Live Site →</a>
+      </div>
+    </div>
+
+    <div class="port-card reveal reveal-delay-2">
+      <div class="port-thumb thumb-dark-teal">
+        Facial Collective
+        <div class="port-overlay"></div>
+        <div class="port-shimmer"></div>
+      </div>
+      <div class="port-body">
+        <span class="port-domain">facialcollective.com</span>
+        <h3 class="port-name">Facial Collective</h3>
+        <p class="port-desc">Luxury beauty and wellness brand — brand-aligned UI system, editorial layout, and premium trust cues baked into the booking and product experience.</p>
+        <div class="port-roles">
+          <span class="role-chip">Brand-Aligned UI</span>
+          <span class="role-chip">Editorial Layout</span>
+          <span class="role-chip">Booking UX</span>
+        </div>
+        <a href="https://facialcollective.com" target="_blank" class="port-link">View Live Site →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Figma Callout -->
+  <div class="port-figma-card reveal" style="margin-top:1.5rem;">
+    <div class="figma-text">
+      <h3>See the full design system in Figma</h3>
+      <p>Annotated screens, component libraries, interaction specs, and design tokens across all recent projects — exactly how I'd deliver yours.</p>
+    </div>
+    <a href="https://www.figma.com/design/ljXPYvFxXRogqHJUC3i0dL/Markloops-Portfolios?node-id=0-1&p=f" target="_blank" class="btn-gold">Open Figma Portfolio</a>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     QUOTE
+════════════════════════════════════ -->
+<div class="quote-wrap">
+  <div class="quote-inner reveal">
+    <div class="quote-mark" aria-hidden="true">"</div>
+    <div>
+      <p class="quote-text">This is a long-term collaboration for me, not a one-off. You get consistent communication, daily Figma updates, and someone who treats your product like their own — available as the site grows into new markets and live event formats.</p>
+      <span class="quote-source">Abdul Mobeen — Senior UX/UI Designer, Shopify Specialist</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     FINAL CTA
+════════════════════════════════════ -->
+<section class="section" id="cta" style="text-align:center; padding-top:8rem; padding-bottom:8rem;">
+  <div class="cta-inner">
+    <span class="eyebrow" style="justify-content:center;"><span class="eyebrow-dot"></span> Let's Build This Together</span>
+    <h2 class="display cta-title reveal" style="font-size:clamp(2.2rem,4.5vw,4rem);">
+      Ready to design your<br/><em>live-gold</em> experience?
+    </h2>
+    <p class="cta-sub reveal reveal-delay-1">
+      Reply today and I'll send a Loom walkthrough of my Figma portfolio with your exact use case in mind. Week 1 starts immediately — UX critique first, pixels second.
+    </p>
+    <div class="cta-btns reveal reveal-delay-2">
+      <a href="https://www.upwork.com/freelancers/~01ac0ddd2a7eb2bed8" target="_blank" class="btn-gold">Hire Me on Upwork</a>
+      <a href="https://www.figma.com/design/ljXPYvFxXRogqHJUC3i0dL/Markloops-Portfolios?node-id=0-1&p=f" target="_blank" class="btn-ghost">View Portfolio First</a>
+    </div>
+
+    <div class="discovery-box reveal reveal-delay-3">
+      <span class="dq-eyebrow">Discovery Question</span>
+      <p class="dq-text">"For the country-switching feature — is the primary intent to filter live streams by region, or to handle localised pricing and currency as well? That single decision shapes the entire navigation architecture, so I'd want to clarify it in our first call before touching any wireframes."</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- .page -->
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <a href="#hero" class="footer-logo">Abdul Mobeen</a>
+  <ul class="footer-nav">
+    <li><a href="https://www.upwork.com/freelancers/~01ac0ddd2a7eb2bed8" target="_blank">Upwork Profile</a></li>
+    <li><a href="https://www.figma.com/design/ljXPYvFxXRogqHJUC3i0dL/Markloops-Portfolios?node-id=0-1&p=f" target="_blank">Figma Portfolio</a></li>
+    <li><a href="https://atelierrmr.ca" target="_blank">Atelier RMR</a></li>
+    <li><a href="https://prima.co" target="_blank">Prima</a></li>
+  </ul>
+  <span class="footer-copy">Senior UX/UI Designer · Shopify · Figma · Live Commerce</span>
+</footer>
+
+<script>
+// ─── PARTICLE CANVAS ───
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, pts = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+
+function init() {
+  pts = [];
+  const n = Math.floor((W * H) / 16000);
+  for (let i = 0; i < n; i++) {
+    pts.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.1 + 0.3,
+      vx: (Math.random() - 0.5) * 0.12,
+      vy: (Math.random() - 0.5) * 0.12,
+      a: Math.random() * 0.45 + 0.08,
+      gold: Math.random() > 0.55
+    });
+  }
+}
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  pts.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = p.gold
+      ? `rgba(201,168,76,${p.a})`
+      : `rgba(168,181,192,${p.a * 0.4})`;
+    ctx.fill();
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0) p.x = W;
+    if (p.x > W) p.x = 0;
+    if (p.y < 0) p.y = H;
+    if (p.y > H) p.y = 0;
+  });
+  requestAnimationFrame(draw);
+}
+
+resize(); init(); draw();
+window.addEventListener('resize', () => { resize(); init(); });
+
+// ─── SCROLL REVEAL ───
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+revealEls.forEach(el => io.observe(el));
+
+// ─── ACTIVE NAV ───
+const sections = document.querySelectorAll('section[id], div[id]');
+const links = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) cur = s.id; });
+  links.forEach(a => {
+    const href = a.getAttribute('href');
+    if (href === '#' + cur) a.classList.add('active');
+    else a.classList.remove('active');
+  });
+
+  // Deepen nav bg on scroll
+  const nav = document.getElementById('main-nav');
+  if (window.scrollY > 60) {
+    nav.style.background = 'rgba(8,8,9,0.96)';
+  } else {
+    nav.style.background = 'rgba(8,8,9,0.80)';
+  }
+});
+
+// ─── COUNTRY PILL TOGGLE (live preview card) ───
+document.querySelectorAll('.country-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('.country-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+  });
+});
+
+// ─── COUNTRY SWITCHER (live streams card) ───
+document.querySelectorAll('.cs-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('.cs-pill').forEach(p => p.classList.remove('on'));
+    pill.classList.add('on');
+  });
+});
+</script>
+
+</body>
+</html>
